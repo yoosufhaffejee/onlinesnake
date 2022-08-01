@@ -674,29 +674,6 @@ function isTouchDevice() {
        (navigator.msMaxTouchPoints > 0));
 }
 
-function InitP1Controls()
-{
-    buttonMappings.push([87, 83, 65, 68]);
-    playerSnakes.push(clonedSnakes[playerCount]);
-    //aliveSnakes.push(clonedSnakes[playerCount]);
-    playerCount++;
-    if(playerCount === 1)
-    {
-	    WinningScore = 999;
-    }
-}
-
-if(isTouchDevice() === true)
-{
-    let text = "Touchscreen Detected!\nEnable Touch Controls?.";
-    if (confirm(text) == true) {
-        InitP1Controls();
-    }
-    else {
-
-    }
-}
-
 var xDown = null;                                                        
 var yDown = null;
 
