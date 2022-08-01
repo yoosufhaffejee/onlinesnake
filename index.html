@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snake game</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <canvas id="game" width="400" height="400"></canvas>
+    <p hidden style="color:red" id="txtPause">Game pasued! Press 'Esc' to continue...</p>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p id="modalText">Tap a key</p>
+        </div>
+    </div>
+
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyD2Wc9Xov8aiIj-kcCGyPGwbe1ec-DcuNg",
+          authDomain: "snakeonlinemultiplayer.firebaseapp.com",
+          databaseURL: "https://snakeonlinemultiplayer-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "snakeonlinemultiplayer",
+          storageBucket: "snakeonlinemultiplayer.appspot.com",
+          messagingSenderId: "30643742346",
+          appId: "1:30643742346:web:25be6dab7f279d21602f73"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <!--Firebase-->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
