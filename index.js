@@ -722,6 +722,7 @@ function handleTouchMove(evt) {
     /* reset values */
     xDown = null;
     yDown = null;
+    player.set(aliveSnakes[myPlayerIndex]);
 };
 
  //drawGame(); 
