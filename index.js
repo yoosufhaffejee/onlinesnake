@@ -87,6 +87,7 @@ let allPlayers = firebase.database().ref(`players`);
 let myPlayerIndex = 0;
 let playerId;
 let player;
+let Food;
 // Runs of load
 firebase.auth().onAuthStateChanged((user) => {
     console.log(user);
@@ -94,6 +95,7 @@ firebase.auth().onAuthStateChanged((user) => {
       //You're logged in!
       playerId = user.uid;
       player = firebase.database().ref(`players/${playerId}`);
+      Food = firebase.database().ref(`food`);
 
       // Checks how many players in lobby
       allPlayers.once("value", function(snapshot) {
@@ -143,6 +145,7 @@ function addSnake()
         playerSnakes.push(clonedSnakes[playerCount]);
         // Add the player to the game
         player.set(clonedSnakes[playerCount]);
+        Food.set(apple);
     }
 }
 
@@ -553,9 +556,10 @@ function drawScore(){
     if(started === true && AppleInitialized === false)
     {
         apple = new food("red", randomPosition(), randomPosition());
-    	AppleInitialized = true;
+        AppleInitialized = true;
+        Food.set(apple);
     }
-
+    
     ctx.fillStyle= apple.col;
     ctx.fillRect(apple.x*tileCount, apple.y*tileCount, tileSize, tileSize)
  }
@@ -567,15 +571,19 @@ function drawScore(){
 
  // check for collision and change apple position
  function checkCollision(){
-    aliveSnakes.forEach(snake => {
-        if(apple.x==snake.headX && apple.y==snake.headY){
-            apple.x=randomPosition();
-            apple.y=randomPosition();
-            console.log("apple", apple.x, apple.y);
-            snake.tailLength++;
-            snake.score++; //increase our score value
-            console.log(aliveSnakes);
-        }
+    Food.once("value", (snapshot) => {
+        apple = snapshot.val();
+        aliveSnakes.forEach(snake => {
+            if(apple.x==snake.headX && apple.y==snake.headY){
+                apple.x=randomPosition();
+                apple.y=randomPosition();
+                console.log("apple", apple.x, apple.y);
+                snake.tailLength++;
+                snake.score++; //increase our score value
+                console.log(aliveSnakes);
+                Food.set(apple);
+            }
+        });
     });
  }
  
